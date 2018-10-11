@@ -1,0 +1,83 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "7509b631bd88e94c3538dfd0afb5de6e",
+    "entities": [
+      {
+        "tableName": "students",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`student_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `last_name` TEXT NOT NULL COLLATE NOCASE, `first_name` TEXT NOT NULL COLLATE NOCASE, `display_name` TEXT NOT NULL COLLATE NOCASE, `phone_number` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "student_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastName",
+            "columnName": "last_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstName",
+            "columnName": "first_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "displayName",
+            "columnName": "display_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phoneNumber",
+            "columnName": "phone_number",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "student_id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_students_last_name_first_name",
+            "unique": true,
+            "columnNames": [
+              "last_name",
+              "first_name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_students_last_name_first_name` ON `${TABLE_NAME}` (`last_name`, `first_name`)"
+          },
+          {
+            "name": "index_students_display_name",
+            "unique": true,
+            "columnNames": [
+              "display_name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_students_display_name` ON `${TABLE_NAME}` (`display_name`)"
+          },
+          {
+            "name": "index_students_phone_number",
+            "unique": false,
+            "columnNames": [
+              "phone_number"
+            ],
+            "createSql": "CREATE  INDEX `index_students_phone_number` ON `${TABLE_NAME}` (`phone_number`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"7509b631bd88e94c3538dfd0afb5de6e\")"
+    ]
+  }
+}
